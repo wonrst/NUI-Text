@@ -34,42 +34,61 @@ namespace NUIText
                     CellPadding = new Size2D(10, 10),
                 },
                 WidthSpecification = LayoutParamPolicies.MatchParent,
-                HeightSpecification = LayoutParamPolicies.WrapContent,
+                HeightSpecification = LayoutParamPolicies.MatchParent,
+                ThemeChangeSensitive = true,
             };
             window.Add(view);
 
 
             var brightTheme = new Theme()
             {
+                ["BackgroundView"] = new ViewStyle()
+                {
+                    BackgroundColor = new Color(0.8f, 0.8f, 0.8f, 1.0f),
+                },
                 ["NormalLabel"] = new TextLabelStyle()
                 {
                     TextColor = new Color(0.1f, 0.1f, 0.1f, 1.0f),
+                    BackgroundColor = new Color(0.9f, 0.9f, 0.9f, 1.0f),
                 },
                 ["NormalField"] = new TextFieldStyle()
                 {
                     TextColor = new Color(0.1f, 0.1f, 0.1f, 1.0f),
+                    BackgroundColor = new Color(0.9f, 0.9f, 0.9f, 1.0f),
                 },
                 ["NormalEditor"] = new TextEditorStyle()
                 {
                     TextColor = new Color(0.1f, 0.1f, 0.1f, 1.0f),
+                    BackgroundColor = new Color(0.9f, 0.9f, 0.9f, 1.0f),
                 },
             };
 
             var darkTheme = new Theme()
             {
+                ["BackgroundView"] = new ViewStyle()
+                {
+                    BackgroundColor = new Color(0.2f, 0.2f, 0.2f, 1.0f),
+                },
                 ["NormalLabel"] = new TextLabelStyle()
                 {
                     TextColor = new Color(0.9f, 0.9f, 0.9f, 1.0f),
+                    BackgroundColor = new Color(0.1f, 0.1f, 0.1f, 1.0f),
                 },
                 ["NormalField"] = new TextFieldStyle()
                 {
                     TextColor = new Color(0.9f, 0.9f, 0.9f, 1.0f),
+                    BackgroundColor = new Color(0.1f, 0.1f, 0.1f, 1.0f),
                 },
                 ["NormalEditor"] = new TextEditorStyle()
                 {
                     TextColor = new Color(0.9f, 0.9f, 0.9f, 1.0f),
+                    BackgroundColor = new Color(0.1f, 0.1f, 0.1f, 1.0f),
                 },
             };
+
+            ThemeManager.ApplyTheme(brightTheme);
+
+            view.StyleName = "BackgroundView";
 
             var buttonBright = NewButton("Set bright theme");
             view.Add(buttonBright);
@@ -103,12 +122,11 @@ namespace NUIText
             var label = new TextLabel
             {
                 Text = text,
-                //FontFamily = "SamsungOneUI",
+                FontFamily = "SamsungOneUI",
                 MultiLine = true,
                 WidthSpecification = LayoutParamPolicies.MatchParent,
                 HeightSpecification = LayoutParamPolicies.WrapContent,
                 PointSize = 20.0f,
-                BackgroundColor = new Color(0.5f, 0.5f, 0.5f, 1.0f),
                 ThemeChangeSensitive = true,
             };
             return label;
@@ -119,11 +137,10 @@ namespace NUIText
             var field = new TextField
             {
                 Text = text,
-                //FontFamily = "SamsungOneUI",
+                FontFamily = "SamsungOneUI",
                 WidthSpecification = LayoutParamPolicies.MatchParent,
                 HeightSpecification = LayoutParamPolicies.WrapContent,
                 PointSize = 20.0f,
-                BackgroundColor = new Color(0.5f, 0.5f, 0.5f, 1.0f),
                 ThemeChangeSensitive = true,
             };
             return field;
@@ -134,11 +151,10 @@ namespace NUIText
             var editor = new TextEditor
             {
                 Text = text,
-                //FontFamily = "SamsungOneUI",
+                FontFamily = "SamsungOneUI",
                 WidthSpecification = LayoutParamPolicies.MatchParent,
                 HeightSpecification = LayoutParamPolicies.WrapContent,
                 PointSize = 20.0f,
-                BackgroundColor = new Color(0.5f, 0.5f, 0.5f, 1.0f),
                 ThemeChangeSensitive = true,
             };
             return editor;
