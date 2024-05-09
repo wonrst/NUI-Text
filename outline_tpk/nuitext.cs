@@ -18,6 +18,7 @@ namespace NUIText
         float BACKGROUND_OPACITY = 1.0f;
 
         Color SHADOW_COLOR = Color.Red;
+        float SHADOW_OPACITY = 1.0f;
         int SHADOW_TYPE = 0;
 
         TextLabel LABEL_BIG;
@@ -41,6 +42,11 @@ namespace NUIText
         Button btnShadowColor3;
         Button btnShadowColor4;
         Button btnShadowColor5;
+
+        Button btnShadowOpacity1;
+        Button btnShadowOpacity2;
+        Button btnShadowOpacity3;
+        Button btnShadowOpacity4;
 
         Button btnBgColor1;
         Button btnBgColor2;
@@ -79,6 +85,8 @@ namespace NUIText
         {
             Window window = Window.Instance;
             window.WindowSize = windowSize;
+            window.SetTransparency(true);
+            window.BackgroundColor = Color.Transparent;
 
             string resourcePath = Tizen.Applications.Application.Current.DirectoryInfo.Resource;
             FontClient.Instance.AddCustomFontDirectory(resourcePath);
@@ -93,7 +101,8 @@ namespace NUIText
                 },
                 WidthSpecification = LayoutParamPolicies.MatchParent,
                 HeightSpecification = LayoutParamPolicies.WrapContent,
-                BackgroundColor = Color.Black,
+                //BackgroundColor = Color.Black,
+                BackgroundColor = Color.Transparent,
             };
             window.Add(view);
 
@@ -101,23 +110,28 @@ namespace NUIText
             {
                 WidthSpecification = LayoutParamPolicies.MatchParent,
                 HeightSpecification = 150,
-                BackgroundColor = Color.Black,
+                //BackgroundColor = Color.Black,
+                BackgroundColor = Color.Transparent,
             };
             view.Add(dummy);
 
 
 
             // Test Label
+            /*
             var videoView_small = new VideoView();
             videoView_small.WidthSpecification = 200;
-            videoView_small.HeightSpecification = 50;
+            videoView_small.HeightSpecification = 100;
             view.Add(videoView_small);
+            */
 
             LABEL_SMALL = NewTextLabel(TEST_STRING);
             LABEL_SMALL.WidthSpecification = 200;
-            LABEL_SMALL.HeightSpecification = 50;
-            LABEL_SMALL.PointSize = 30.0f;
-            videoView_small.Add(LABEL_SMALL);
+            LABEL_SMALL.HeightSpecification = 100;
+            LABEL_SMALL.PointSize = 40.0f;
+            //videoView_small.Add(LABEL_SMALL);
+            view.Add(LABEL_SMALL);
+
 
 
             var videoView = new VideoView();
@@ -311,6 +325,56 @@ namespace NUIText
                 SetShadowColorButton(btnShadowColor5);
 
                 SHADOW_COLOR = Color.Green;
+                SetShadow(LABEL_BIG, SHADOW_TYPE, SHADOW_COLOR);
+                SetShadow(LABEL_SMALL, SHADOW_TYPE, SHADOW_COLOR);
+            };
+
+
+
+            // shadow opacity
+            var shadowOpacityView = NewView(true);
+            view.Add(shadowOpacityView);
+
+            btnShadowOpacity1 = NewButton("Opacity 0.0");
+            shadowOpacityView.Add(btnShadowOpacity1);
+            btnShadowOpacity1.Clicked += (s, e) =>
+            {
+                SetShadowOpacityButton(btnShadowOpacity1);
+
+                SHADOW_OPACITY = 0.0f;
+                SetShadow(LABEL_BIG, SHADOW_TYPE, SHADOW_COLOR);
+                SetShadow(LABEL_SMALL, SHADOW_TYPE, SHADOW_COLOR);
+            };
+
+            btnShadowOpacity2 = NewButton("Opacity 0.3");
+            shadowOpacityView.Add(btnShadowOpacity2);
+            btnShadowOpacity2.Clicked += (s, e) =>
+            {
+                SetShadowOpacityButton(btnShadowOpacity2);
+
+                SHADOW_OPACITY = 0.3f;
+                SetShadow(LABEL_BIG, SHADOW_TYPE, SHADOW_COLOR);
+                SetShadow(LABEL_SMALL, SHADOW_TYPE, SHADOW_COLOR);
+            };
+
+            btnShadowOpacity3 = NewButton("Opacity 0.6");
+            shadowOpacityView.Add(btnShadowOpacity3);
+            btnShadowOpacity3.Clicked += (s, e) =>
+            {
+                SetShadowOpacityButton(btnShadowOpacity3);
+
+                SHADOW_OPACITY = 0.6f;
+                SetShadow(LABEL_BIG, SHADOW_TYPE, SHADOW_COLOR);
+                SetShadow(LABEL_SMALL, SHADOW_TYPE, SHADOW_COLOR);
+            };
+
+            btnShadowOpacity4 = NewButton("Opacity 1.0");
+            shadowOpacityView.Add(btnShadowOpacity4);
+            btnShadowOpacity4.Clicked += (s, e) =>
+            {
+                SetShadowOpacityButton(btnShadowOpacity4);
+
+                SHADOW_OPACITY = 1.0f;
                 SetShadow(LABEL_BIG, SHADOW_TYPE, SHADOW_COLOR);
                 SetShadow(LABEL_SMALL, SHADOW_TYPE, SHADOW_COLOR);
             };
@@ -538,6 +602,7 @@ namespace NUIText
             SetStyleButton(btnStyle1);
             SetShadowTypeButton(btnNoShadow);
             SetShadowColorButton(btnShadowColor3);
+            SetShadowOpacityButton(btnShadowOpacity4);
             SetBackgroundColorButton(btnBgColor2);
             SetBackgroundOpacityButton(btnBgOpacity4);
             SetTextColorButton(btnTextColor1);
@@ -548,6 +613,9 @@ namespace NUIText
         {
             float pointSize = label.PointSize;
             float roughValue = (float)Math.Round(pointSize / 20);
+
+            SHADOW_COLOR = new Color(color.R, color.G, color.B, SHADOW_OPACITY);
+            color = SHADOW_COLOR;
 
             switch(type)
             {
@@ -729,6 +797,15 @@ namespace NUIText
             btnShadowColor3.TextColor = Color.Black;
             btnShadowColor4.TextColor = Color.Black;
             btnShadowColor5.TextColor = Color.Black;
+            button.TextColor = Color.Red;
+        }
+
+        public void SetShadowOpacityButton(Button button)
+        {
+            btnShadowOpacity1.TextColor = Color.Black;
+            btnShadowOpacity2.TextColor = Color.Black;
+            btnShadowOpacity3.TextColor = Color.Black;
+            btnShadowOpacity4.TextColor = Color.Black;
             button.TextColor = Color.Red;
         }
 
