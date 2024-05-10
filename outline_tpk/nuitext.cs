@@ -70,6 +70,14 @@ namespace NUIText
         Button btnTextOpacity3;
         Button btnTextOpacity4;
 
+        Button btnTextCutoutOn;
+        Button btnTextCutoutOff;
+
+
+        public Program() : base()
+        {
+        }
+
         protected override void OnCreate()
         {
             base.OnCreate();
@@ -118,19 +126,16 @@ namespace NUIText
 
 
             // Test Label
-            /*
             var videoView_small = new VideoView();
             videoView_small.WidthSpecification = 200;
             videoView_small.HeightSpecification = 100;
             view.Add(videoView_small);
-            */
 
             LABEL_SMALL = NewTextLabel(TEST_STRING);
             LABEL_SMALL.WidthSpecification = 200;
             LABEL_SMALL.HeightSpecification = 100;
             LABEL_SMALL.PointSize = 40.0f;
-            //videoView_small.Add(LABEL_SMALL);
-            view.Add(LABEL_SMALL);
+            videoView_small.Add(LABEL_SMALL);
 
 
 
@@ -598,6 +603,36 @@ namespace NUIText
             };
 
 
+
+            // Text cutout
+            TextLabel titleCutout = NewTitleLabel(" Text Cutout");
+            view.Add(titleCutout);
+
+            var textCutoutView = NewView(true);
+            view.Add(textCutoutView);
+
+            btnTextCutoutOn = NewButton("On");
+            textCutoutView.Add(btnTextCutoutOn);
+            btnTextCutoutOn.Clicked += (s, e) =>
+            {
+                SetTextCutoutButton(btnTextCutoutOn);
+
+                LABEL_BIG.Cutout = true;
+                LABEL_SMALL.Cutout = true;
+            };
+
+            btnTextCutoutOff = NewButton("Off");
+            textCutoutView.Add(btnTextCutoutOff);
+            btnTextCutoutOff.Clicked += (s, e) =>
+            {
+                SetTextCutoutButton(btnTextCutoutOff);
+
+                LABEL_BIG.Cutout = false;
+                LABEL_SMALL.Cutout = false;
+            };
+
+
+
             // Button default select
             SetStyleButton(btnStyle1);
             SetShadowTypeButton(btnNoShadow);
@@ -607,6 +642,7 @@ namespace NUIText
             SetBackgroundOpacityButton(btnBgOpacity4);
             SetTextColorButton(btnTextColor1);
             SetTextOpacityButton(btnTextOpacity4);
+            SetTextCutoutButton(btnTextCutoutOff);
         }
 
         public void SetShadow(TextLabel label, int type, Color color)
@@ -844,6 +880,13 @@ namespace NUIText
             btnTextOpacity2.TextColor = Color.Black;
             btnTextOpacity3.TextColor = Color.Black;
             btnTextOpacity4.TextColor = Color.Black;
+            button.TextColor = Color.Red;
+        }
+
+        public void SetTextCutoutButton(Button button)
+        {
+            btnTextCutoutOn.TextColor = Color.Black;
+            btnTextCutoutOff.TextColor = Color.Black;
             button.TextColor = Color.Red;
         }
 
