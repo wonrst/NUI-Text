@@ -226,7 +226,13 @@ namespace NUIText
                 {
                     label.WidthSpecification = (int)e.Width;
                     label.HeightSpecification = (int)e.Height;
+                }
+            };
 
+            label.Relayout += (s, e) =>
+            {
+                if(label.ManualRendered)
+                {
                     for (int i = 0 ; i < scrollCount ; i ++)
                     {
                         scrolls[i].ScrollTo(float.PositiveInfinity, true);
@@ -244,24 +250,6 @@ namespace NUIText
 
             labels.Add(label);
 
-            return label;
-        }
-
-        public TextLabel NewTitle(string text)
-        {
-            var rand = new Random();
-            int pointSize = rand.Next(4, 10);
-
-            var label = new TextLabel
-            {
-                Text = text,
-                FontFamily = "Lobster",
-                MultiLine = true,
-                WidthSpecification = LayoutParamPolicies.MatchParent,
-                HeightSpecification = 30,
-                PointSize = 8.0f,
-                BackgroundColor = Color.White,
-            };
             return label;
         }
 
