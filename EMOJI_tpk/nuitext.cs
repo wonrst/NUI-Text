@@ -29,10 +29,12 @@ namespace TextComponentsTest
         public static float SCALE = 1.2f;
         public static float SCALE_STEP = 0.2f;
 
+        public static bool ASYNC = true;
+
         public static int ROW = 18;
         public static int COL = 19;
 
-        public static float POINT_SIZE = 22.0f;
+        public static float PIXEL_SIZE = 29.0f;
         public static int CELL = 1;
         public static int WIDTH = 30;
         public static int HEIGHT = 29;
@@ -81,6 +83,16 @@ namespace TextComponentsTest
             if (e.Key.KeyPressedName == "F1")
             {
                 PrintShortcut();
+            }
+            else if (e.Key.KeyPressedName == "F2")
+            {
+                ASYNC = false;
+                Tizen.Log.Info(TAG, "Sync rendering \n");
+            }
+            else if (e.Key.KeyPressedName == "F3")
+            {
+                ASYNC = true;
+                Tizen.Log.Info(TAG, "Async rendering \n");
             }
             else if (e.Key.KeyPressedName == "F5")
             {
@@ -151,6 +163,8 @@ namespace TextComponentsTest
         {
             Tizen.Log.Error(TAG, "EMOJI TEST HELP                  \n");
             Tizen.Log.Info (TAG, "F1    : Help                     \n");
+            Tizen.Log.Info (TAG, "F2    : Sync  rendering          \n");
+            Tizen.Log.Info (TAG, "F3    : Async rendering          \n");
             Tizen.Log.Info (TAG, "F5    : Refresh                  \n");
             Tizen.Log.Info (TAG, "ESC   : Scale Test Start/Stop    \n");
             Tizen.Log.Info (TAG, "Num 1 : Scale 1.0                \n");
@@ -983,9 +997,11 @@ namespace TextComponentsTest
                 Ellipsis = false,
                 WidthSpecification = WIDTH,
                 HeightSpecification = HEIGHT,
-                PointSize = POINT_SIZE,
+                PixelSize = PIXEL_SIZE,
                 BackgroundColor = Color.White,
-                RenderMode = TextRenderMode.AsyncAuto,
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                RenderMode = ASYNC ? TextRenderMode.AsyncAuto : TextRenderMode.Sync,
             };
 
             if (tap)
@@ -1009,10 +1025,10 @@ namespace TextComponentsTest
                 Text = labelText,
                 WidthSpecification = WIDTH,
                 HeightSpecification = HEIGHT,
-                PointSize = POINT_SIZE / 3,
+                PixelSize = PIXEL_SIZE / 3,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
-                RenderMode = TextRenderMode.AsyncAuto,
+                RenderMode = ASYNC ? TextRenderMode.AsyncAuto : TextRenderMode.Sync,
             };
             emoji.Add(label);
             parent.Add(emoji);
@@ -1073,9 +1089,9 @@ namespace TextComponentsTest
                 Ellipsis = false,
                 WidthSpecification = WIDTH / 2,
                 HeightSpecification = HEIGHT / 2,
-                PointSize = POINT_SIZE / 2,
+                PixelSize = PIXEL_SIZE / 2,
                 BackgroundColor = Color.White,
-                RenderMode = TextRenderMode.AsyncAuto,
+                RenderMode = ASYNC ? TextRenderMode.AsyncAuto : TextRenderMode.Sync,
             };
             view.Add(emoji);
 
@@ -1092,11 +1108,11 @@ namespace TextComponentsTest
                 Text = desc,
                 WidthSpecification = LayoutParamPolicies.MatchParent,
                 HeightSpecification = HEIGHT / 2,
-                PointSize = POINT_SIZE / 3 - 1,
+                PixelSize = PIXEL_SIZE / 3 - 1,
                 HorizontalAlignment = HorizontalAlignment.Begin,
                 VerticalAlignment = VerticalAlignment.Center,
                 BackgroundColor = Color.White,
-                RenderMode = TextRenderMode.AsyncAuto,
+                RenderMode = ASYNC ? TextRenderMode.AsyncAuto : TextRenderMode.Sync,
             };
             view.Add(description);
         }
@@ -1170,11 +1186,11 @@ namespace TextComponentsTest
                 EnableMarkup = true,
                 WidthSpecification = LayoutParamPolicies.MatchParent,
                 HeightSpecification = HEIGHT,
-                PointSize = POINT_SIZE / 3,
+                PixelSize = PIXEL_SIZE / 3,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
                 BackgroundColor = new Color("#EEEEEE"),
-                RenderMode = TextRenderMode.AsyncAuto,
+                RenderMode = ASYNC ? TextRenderMode.AsyncAuto : TextRenderMode.Sync,
             };
             LOG_TOP_VIEW.Add(TITLE);
 
@@ -1223,10 +1239,10 @@ namespace TextComponentsTest
                 EnableMarkup = true,
                 WidthSpecification = benchLength,
                 HeightSpecification = HEIGHT,
-                PointSize = POINT_SIZE,
+                PixelSize = PIXEL_SIZE,
                 VerticalAlignment = VerticalAlignment.Center,
                 BackgroundColor = new Color("#EEEEEE"),
-                RenderMode = TextRenderMode.AsyncAuto,
+                RenderMode = ASYNC ? TextRenderMode.AsyncAuto : TextRenderMode.Sync,
             };
             MAIN_TOP_VIEW.Add(WORK_BENCH);
 
@@ -1252,13 +1268,13 @@ namespace TextComponentsTest
 
         public void SetConfig()
         {
-            POINT_SIZE = 22.0f;
+            PIXEL_SIZE = 29.0f;
             CELL = 1;
             WIDTH = 30;
             HEIGHT = 29;
             LOG_WIDTH = 300;
 
-            POINT_SIZE = POINT_SIZE * SCALE;
+            PIXEL_SIZE = PIXEL_SIZE * SCALE;
             WIDTH = (int)(WIDTH * SCALE);
             HEIGHT = (int)(HEIGHT * SCALE);
             LOG_WIDTH = (int)(LOG_WIDTH * SCALE);
