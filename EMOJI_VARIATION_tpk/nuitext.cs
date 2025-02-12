@@ -21,6 +21,8 @@ namespace NUIText
         string HEAVY_BLACK_HEART = "\U00002764";
         string KISS = "\U0001F48B";
 
+        string KEYCAP = "\u20e3";
+
         string[] PEOPLE = {
             "\U0001F9D1", // Person
             "\U0001F468", // Man
@@ -574,6 +576,8 @@ namespace NUIText
                 ClearEmojiView();
 
                 string[] array = {
+
+                    "12:30, Hello:World:: 12:34::56",
                     //"✨✨\ufe0e✨\ufe0f",
 
                     "🥵🥵😶‍🌫️😶‍🌫️🤕🤕✨✨✨🥳🥳✨✨✨✨✨✨🥳🥳✨✨✨✨✨🥵🥵🥵",
@@ -764,6 +768,10 @@ namespace NUIText
                 }
                 view.Add(NewVariationView(i));
             }
+            view.Add(NewKeycapView("#"));
+            view.Add(NewKeycapView("*"));
+            view.Add(NewKeycapView("0"));
+            view.Add(NewKeycapView("1"));
         }
 
         public void AddVariationFontTest(string fontFamily)
@@ -779,6 +787,10 @@ namespace NUIText
                 }
                 view.Add(NewVariationFont(i, fontFamily));
             }
+            view.Add(NewKeycapFont("#", fontFamily));
+            view.Add(NewKeycapFont("*", fontFamily));
+            view.Add(NewKeycapFont("0", fontFamily));
+            view.Add(NewKeycapFont("1", fontFamily));
         }
 
         public View NewSkinView(int emojiIndex)
@@ -1021,6 +1033,37 @@ namespace NUIText
             }
 
             return view;
+        }
+
+        public View NewKeycapView(string digit)
+        {
+            var view = new View()
+            {
+                Layout = new LinearLayout()
+                {
+                    LinearOrientation = LinearLayout.Orientation.Horizontal,
+                    LinearAlignment = LinearLayout.Alignment.Begin,
+                    CellPadding = new Size2D(1, 1),
+                },
+                WidthSpecification = VARIATION_VIEW_WIDTH,
+                HeightSpecification = HEIGHT,
+                BackgroundColor = Color.Black,
+            };
+
+            view.Add(NewTextLabel(digit + KEYCAP));
+            view.Add(NewTextLabel(digit + VS15 + KEYCAP));
+            view.Add(NewTextLabel(digit + VS16 + KEYCAP));
+
+            return view;
+        }
+
+        public TextLabel NewKeycapFont(string digit, string fontFamily)
+        {
+            string variation = digit + KEYCAP + digit + VS15 + KEYCAP + digit + VS16 + KEYCAP;
+            var label = NewTextLabel(variation);
+            label.WidthSpecification = VARIATION_VIEW_WIDTH;
+            label.FontFamily = fontFamily;
+            return label;
         }
 
         public View NewVariationView(int variationIndex)
