@@ -9,6 +9,25 @@ namespace NUIText
     {
         const string TAG = "NUIText";
 
+        const float FONT_SIZE = 32;
+        const float BUTTON_FONT_SIZE = FONT_SIZE / 2;
+
+        const bool HORIZONTAL = true;
+        const bool VERTICAL   = false;
+        const int  MATCH_PARENT = LayoutParamPolicies.MatchParent;
+        const int  WRAP_CONTENT = LayoutParamPolicies.WrapContent;
+        Extents    PADDING      = new Extents(10, 10, 5, 5);
+
+        const string SHORT_TEXT = "Hello, World!";
+        const string LONG_TEXT = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+        const string RTL_TEXT = "مرحبا بمرحبا مرحبا مرحبا مرحبا مرحبا مرحبا مرحبا مرحبا العالم.";
+        const string MIX_TEXT = "Hello world demo\n안녕하세요 세계 (مرحبا بالعالم שלום) עולם\nשלום مرحبا بالعالم עולם (hello) مرحبا بالعالم world مرحبا بالعالم שלום עולם 안녕하세요 세계\nبالعالم שלום (세계) world demo (עולם)\nשלום (مرحبا بالعالم עולם) (안녕하세요)";
+        const string EMOJI_TEXT = "👨‍👩‍👧‍👦👩‍👩‍👦‍👦👨‍👨‍👧‍👧👩‍👦‍👦👨‍👦‍👦👩‍👩‍👧‍👧👨‍👧‍👦👩‍👩‍👧‍👦👨‍👨‍👦‍👦👩‍👧‍👧👨‍👩‍👧‍👧👩‍👦‍👧🧑‍🎓👨‍🎓👩‍🎓🧑‍🏫👨‍🏫👩‍🏫🧑‍⚖️👨‍⚖️👩‍⚖️🧑‍🌾👨‍🌾👩‍🌾🧑‍🍳👨‍🍳👩‍🍳🧑‍🔬👨‍🔬👩‍🔬🧑‍💻👨‍💻👩‍💻🧑‍🎨👨‍🎨👩‍🎨🧑‍✈️👨‍✈️👩‍✈️🧑‍🚀👨‍🚀👩‍🚀🧑‍🚒👨‍🚒👩‍🚒🧑‍🏭👨‍🏭👩‍🏭🧑‍⚕️👨‍⚕️👩‍⚕️🧑‍🎤👨‍🎤👩‍🎤🏃‍♂️🏃‍♀️🏋️‍♂️🏋️‍♀️🚴‍♂️🚴‍♀️🤹‍♂️🤹‍♀️🚣‍♂️🚣‍♀️🏄‍♂️🏄‍♀️🤾‍♂️🤾‍♀️⛹️‍♂️⛹️‍♀️🤽‍♂️🤽‍♀️";
+
+        public TextLabel label;
+        public TextField field;
+        public TextEditor editor;
+
         protected override void OnCreate()
         {
             base.OnCreate();
@@ -17,7 +36,7 @@ namespace NUIText
 
         void Initialize()
         {
-            GenerateUI(new Size(480, 780));
+            GenerateUI(new Size(1200, 800));
         }
 
         public void GenerateUI(Size windowSize)
@@ -25,47 +44,47 @@ namespace NUIText
             Window window = Window.Instance;
             window.WindowSize = windowSize;
 
-            var view = new View()
-            {
-                Layout = new LinearLayout()
-                {
-                    LinearOrientation = LinearLayout.Orientation.Vertical,
-                    LinearAlignment = LinearLayout.Alignment.Begin,
-                    CellPadding = new Size2D(10, 10),
-                },
-                WidthSpecification = LayoutParamPolicies.MatchParent,
-                HeightSpecification = LayoutParamPolicies.WrapContent,
-                BackgroundColor = Color.Black,
-            };
+            var view = NewView(VERTICAL, MATCH_PARENT, MATCH_PARENT);
             window.Add(view);
 
-            var label = NewTextLabel("Hello, World!");
+            var menu = NewView(HORIZONTAL, MATCH_PARENT, WRAP_CONTENT);
+            view.Add(menu);
+
+            label = NewTextLabel(SHORT_TEXT);
             view.Add(label);
 
-            var field = NewTextField("Hello, World!");
+            field = NewTextField(SHORT_TEXT);
             view.Add(field);
-            field.TextChanged += (s, e) =>
-            {
-                Tizen.Log.Info(TAG, $"TextField TextChanged:{(s as TextField).Text}\n");
-            };
 
-            var editor = NewTextEditor("Hello, World!");
+            editor = NewTextEditor(SHORT_TEXT);
             view.Add(editor);
-            editor.TextChanged += (s, e) =>
-            {
-                Tizen.Log.Info(TAG, $"TextEditor TextChanged:{(s as TextEditor).Text}\n");
-            };
 
-            var button = NewButton("Set string");
-            view.Add(button);
-            button.Clicked += (s, e) =>
-            {
-                string longString = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+            var buttonShort = NewButton("SHORT");
+            menu.Add(buttonShort);
+            buttonShort.Clicked += (s, e) => { SetText(SHORT_TEXT); };
 
-                label.Text = longString;
-                field.Text = longString;
-                editor.Text = longString;
-            };
+            var buttonLong = NewButton("LONG");
+            menu.Add(buttonLong);
+            buttonLong.Clicked += (s, e) => { SetText(LONG_TEXT); };
+
+            var buttonRTL = NewButton("RTL");
+            menu.Add(buttonRTL);
+            buttonRTL.Clicked += (s, e) => { SetText(RTL_TEXT); };
+
+            var buttonMix = NewButton("MIX");
+            menu.Add(buttonMix);
+            buttonMix.Clicked += (s, e) => { SetText(MIX_TEXT); };
+
+            var buttonEmoji = NewButton("EMOJI");
+            menu.Add(buttonEmoji);
+            buttonEmoji.Clicked += (s, e) => { SetText(EMOJI_TEXT); };
+        }
+
+        public void SetText(string text)
+        {
+            label.Text = text;
+            field.Text = text;
+            editor.Text = text;
         }
 
         public TextLabel NewTextLabel(string text)
@@ -76,8 +95,10 @@ namespace NUIText
                 MultiLine = true,
                 WidthSpecification = LayoutParamPolicies.MatchParent,
                 HeightSpecification = LayoutParamPolicies.WrapContent,
-                PointSize = 20.0f,
+                PixelSize = FONT_SIZE,
+                TextColor = Color.Black,
                 BackgroundColor = Color.White,
+                Padding = PADDING,
             };
             return label;
         }
@@ -89,9 +110,11 @@ namespace NUIText
                 Text = text,
                 WidthSpecification = LayoutParamPolicies.MatchParent,
                 HeightSpecification = LayoutParamPolicies.WrapContent,
-                PointSize = 20.0f,
+                PixelSize = FONT_SIZE,
+                TextColor = Color.Black,
                 BackgroundColor = Color.White,
-                MaxLength = 20,
+                Padding = PADDING,
+                MaxLength = 2000,
             };
             return field;
         }
@@ -102,11 +125,30 @@ namespace NUIText
             {
                 Text = text,
                 WidthSpecification = LayoutParamPolicies.MatchParent,
-                HeightSpecification = LayoutParamPolicies.WrapContent,
-                PointSize = 20.0f,
+                HeightSpecification = LayoutParamPolicies.MatchParent,
+                PixelSize = FONT_SIZE,
+                TextColor = Color.Black,
                 BackgroundColor = Color.White,
+                Padding = PADDING,
             };
             return editor;
+        }
+
+        public View NewView(bool horizontal, int width, int height)
+        {
+            var view = new View()
+            {
+                Layout = new LinearLayout()
+                {
+                    LinearOrientation = horizontal ? LinearLayout.Orientation.Horizontal : LinearLayout.Orientation.Vertical,
+                    LinearAlignment = LinearLayout.Alignment.Begin,
+                    CellPadding = new Size2D(1, 1),
+                },
+                WidthSpecification = width,
+                HeightSpecification = height,
+                BackgroundColor = Color.Black,
+            };
+            return view;
         }
 
         public Button NewButton(string text)
@@ -114,11 +156,11 @@ namespace NUIText
             var button = new Button(NewButtonStyle())
             {
                 Text = text,
-                PointSize = 20.0f,
                 WidthSpecification = LayoutParamPolicies.MatchParent,
-                HeightSpecification = LayoutParamPolicies.WrapContent,
+                HeightSpecification = (int)BUTTON_FONT_SIZE * 2 + 8,
                 ItemHorizontalAlignment = HorizontalAlignment.Center,
             };
+            button.TextLabel.PixelSize = BUTTON_FONT_SIZE;
             return button;
         }
 
@@ -129,8 +171,8 @@ namespace NUIText
                 CornerRadius = 0.0f,
                 BackgroundColor = new Selector<Color>()
                 {
-                    Normal = new Color(0.25f, 0.75f, 1.0f, 1.0f),
-                    Pressed = new Color(0.25f, 0.75f, 1.0f, 0.3f),
+                    Normal = new Color(0.1f, 0.1f, 0.1f, 1.0f),
+                    Pressed = new Color(0.5f, 0.5f, 0.5f, 0.25f),
                 },
                 Overlay = new ImageViewStyle()
                 {
@@ -142,7 +184,7 @@ namespace NUIText
                 },
                 Text = new TextLabelStyle()
                 {
-                    TextColor = new Color(0.0f, 0.0f, 0.0f, 1.0f),
+                    TextColor = Color.White,
                 }
             };
             return style;
