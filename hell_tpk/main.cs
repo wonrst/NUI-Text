@@ -237,6 +237,11 @@ namespace NUIText
                 streamSim.ChunkSize++;
                 UpdateDescription();
             }
+            else if (e.Key.KeyPressedName == "e")
+            {
+                streamSim.UseRandomChunkSize = !streamSim.UseRandomChunkSize;
+                UpdateDescription();
+            }
             else if (e.Key.KeyPressedName == "d")
             {
                 autoTest.IntervalMs -= 1000;
@@ -284,11 +289,13 @@ namespace NUIText
         string GetCurrentOptions()
         {
             string autoTestStatus = autoTest.IsRunning ? "🟢 Running" : "🔴 Stopped";
+            string chunkSizeStr = streamSim.UseRandomChunkSize ? "Random" : streamSim.ChunkSize.ToString();
+
             return $@"
 
 ## **⚡ Stream Options**
 
-- **Chunk Size:** {streamSim.ChunkSize}
+- **Chunk Size:** {chunkSizeStr}
 - **Interval:** {streamSim.IntervalMs}ms
 
 ---

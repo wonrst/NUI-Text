@@ -13,8 +13,16 @@ namespace NUIText
         private int currentIndex;
         private Action<string, int> onChunk;
         private Action onComplete;
+        private Random random = new Random();
+        private bool useRandomChunkSize = false;
 
         public bool IsRunning => timer?.IsRunning() ?? false;
+
+        public bool UseRandomChunkSize
+        {
+            get => useRandomChunkSize;
+            set => useRandomChunkSize = value;
+        }
 
         public int ChunkSize
         {
@@ -75,6 +83,13 @@ namespace NUIText
         {
             if (currentIndex < fullText.Length)
             {
+                if (useRandomChunkSize)
+                {
+                    if (random.NextDouble() < 0.05)
+                        ChunkSize = random.Next(20, 31);
+                    else
+                        ChunkSize = random.Next(1, 11);
+                }
                 int length = Math.Min(chunkSize, fullText.Length - currentIndex);
                 string chunk = fullText.Substring(currentIndex, length);
                 currentIndex += length;
