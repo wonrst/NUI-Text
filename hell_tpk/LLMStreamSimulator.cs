@@ -31,6 +31,7 @@ namespace NUIText
             {
                 if (value < 1) value = 1;
                 chunkSize = value;
+                if (!useRandomChunkSize)
                 Tizen.Log.Info("NUI", $"ChunkSize:{chunkSize}");
             }
         }

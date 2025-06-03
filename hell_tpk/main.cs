@@ -109,10 +109,6 @@ namespace NUIText
             // markdownRenderer.Style.Code.TitleFontSize = 16.0f;
             // markdownRenderer.Style.Code.Padding = 10;
 
-            // // Link
-            // markdownRenderer.Style.Link.Color = "#4A90E2FF";
-            // markdownRenderer.Style.Link.VisitedColor = "#9B59B6FF";
-
             // markdownRenderer.Render(simpleText);
         }
 
