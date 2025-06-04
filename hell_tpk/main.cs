@@ -88,15 +88,18 @@ namespace NUIText
             // // ThematicBreak
             // markdownRenderer.Style.ThematicBreak.Color = "#EEEEEEFF";
             // markdownRenderer.Style.ThematicBreak.Thickness = 1;
+            // markdownRenderer.Style.ThematicBreak.Margin = 10;
 
             // // Quote
             // markdownRenderer.Style.Quote.BackgroundColor = "#CCCCCC33";
             // markdownRenderer.Style.Quote.Padding = 10;
 
             // // Table
-            // markdownRenderer.Style.Table.BorderColor = "#EEEEEEFF";
+            // markdownRenderer.Style.Table.BorderColor = "#00000000";
+            // markdownRenderer.Style.Table.BorderColor = "#000000FF";
             // markdownRenderer.Style.Table.BorderThickness = 1;
-            // markdownRenderer.Style.Table.Padding = 5;
+            // markdownRenderer.Style.Table.Padding = 10;
+            // markdownRenderer.Style.Table.ItemPadding = 5;
 
             // // Code
             // markdownRenderer.Style.Code.FontFamily = "Ubuntu Mono"; // FIXME
@@ -117,6 +120,7 @@ namespace NUIText
             streamSim.Stop();
             string sample = TestMarkdowns.GetSample(index);
             var sb = new System.Text.StringBuilder();
+            markdownRenderer.Clear();
             streamSim.Start(sample, (chunk, idx) =>
             {
                 sb.Append(chunk);
@@ -131,6 +135,7 @@ namespace NUIText
             streamSim.Stop();
             string sample = TestMarkdowns.GetPrev();
             var sb = new System.Text.StringBuilder();
+            markdownRenderer.Clear();
             streamSim.Start(sample, (chunk, idx) =>
             {
                 sb.Append(chunk);
@@ -143,6 +148,7 @@ namespace NUIText
             streamSim.Stop();
             string sample = TestMarkdowns.GetNext();
             var sb = new System.Text.StringBuilder();
+            markdownRenderer.Clear();
             streamSim.Start(sample, (chunk, idx) =>
             {
                 sb.Append(chunk);
@@ -155,6 +161,7 @@ namespace NUIText
             streamSim.Stop();
             string sample = TestMarkdowns.GetRandom();
             var sb = new System.Text.StringBuilder();
+            markdownRenderer.Clear();
             streamSim.Start(sample, (chunk, idx) =>
             {
                 sb.Append(chunk);
@@ -270,8 +277,9 @@ namespace NUIText
             };
 
             descriptionRenderer.Style.Paragraph.FontColor = "#EFEFEFFF";
-            descriptionRenderer.Style.Table.BorderColor = "#DEDEDEAA";
+            descriptionRenderer.Style.Table.BorderColor = "#FFFFFFFF";
             descriptionRenderer.Style.Quote.BackgroundColor = "#152536FF";
+            descriptionRenderer.Style.ThematicBreak.Margin = 0;
 
             descriptionRenderer.Render(AutoTest.ShortcutGuide + GetCurrentOptions());
             return descriptionRenderer; 
@@ -289,14 +297,14 @@ namespace NUIText
 
             return $@"
 
-## **⚡ Stream Options**
+## ⚡ Stream Options
 
 - **Chunk Size:** {chunkSizeStr}
 - **Interval:** {streamSim.IntervalMs}ms
 
 ---
 
-## **🔄 AutoTest Options**
+## 🔄 AutoTest Options
 
 - **Status:** {autoTestStatus}
 - **Interval:** {autoTest.IntervalMs}ms

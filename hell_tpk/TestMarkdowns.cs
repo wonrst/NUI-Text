@@ -1096,7 +1096,7 @@ TV 가이드에서 바로 시청 가능합니다!
 
 - **무빙**  
   초능력자 가족의 비밀과 성장, 그리고 세대 갈등을 그린 액션 드라마. 박인규, 한효주, 조인성 주연.  
-  *“당신의 비밀은 무엇입니까?”*라는 질문 아래 긴장감 넘치는 전개와 감동적인 가족애가 돋보입니다.
+  *“당신의 비밀은 무엇입니까?”* 라는 질문 아래 긴장감 넘치는 전개와 감동적인 가족애가 돋보입니다.
 
 - **퀸즈 갬빗**  
   체스 천재 소녀의 성장과 내면을 다룬 드라마. 시대상과 인간 관계, 심리묘사가 탁월해 남녀노소 모두에게 인기가 높습니다.
@@ -1389,6 +1389,36 @@ TV 가이드에서 바로 시청 가능합니다!
 
 ",
 
+@"
+How To Use The Demo
+-------------------
+
+1. Type in stuff on the left.
+2. See the live updates on the right.
+
+That's it.  Pretty simple.  There's also a drop-down option above to switch between various views:
+
+- **Preview:**  A live display of the generated HTML as it would render in a browser.
+- **HTML Source:**  The generated HTML before your browser makes it pretty.
+- **Lexer Data:**  What [marked] uses internally, in case you like gory stuff like this.
+- **Quick Reference:**  A brief run-down of how to format things using markdown.
+
+Why Markdown?
+-------------
+
+It's easy.  It's not overly bloated, unlike HTML.  Also, as the creator of [markdown] says,
+
+> The overriding design goal for Markdown's
+> formatting syntax is to make it as readable
+> as possible. The idea is that a
+> Markdown-formatted document should be
+> publishable as-is, as plain text, without
+> looking like it's been marked up with tags
+> or formatting instructions.
+
+Ready to start writing?  Either start changing stuff on the left or
+[clear everything](/demo/?text=) with a simple click.
+",
 
         }; // samples
 

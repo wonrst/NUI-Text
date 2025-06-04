@@ -67,13 +67,13 @@ namespace NUIText
         }
 
 public static readonly string ShortcutGuide = @"
-# 🖥️ **NUI Markdown Renderer Test**
+# 🖥️ NUI Markdown Renderer Test
 
 > Reusable NUI view that renders Markdown as UI components
 
 ---
 
-## 🔥 **Shortcuts**
+## 🔥 Shortcuts
 
 | **카테고리**       | **키**       | **동작 설명**                               |
 |:----------------:|:-----------:|:------------------------------------------|
