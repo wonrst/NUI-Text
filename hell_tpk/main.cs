@@ -95,7 +95,7 @@ namespace NUIText
             // markdownRenderer.Style.Quote.Padding = 10;
 
             // // Table
-            // markdownRenderer.Style.Table.BorderColor = "#00000000";
+            // markdownRenderer.Style.Table.BackgroundColor = "#00000000";
             // markdownRenderer.Style.Table.BorderColor = "#000000FF";
             // markdownRenderer.Style.Table.BorderThickness = 1;
             // markdownRenderer.Style.Table.Padding = 10;
