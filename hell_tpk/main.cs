@@ -91,7 +91,9 @@ namespace NUIText
             // markdownRenderer.Style.ThematicBreak.Margin = 10;
 
             // // Quote
-            // markdownRenderer.Style.Quote.BackgroundColor = "#CCCCCC33";
+            // markdownRenderer.Style.Quote.BarColor = "#DFDFDFFF";
+            // markdownRenderer.Style.Quote.BarWidth = 6;
+            // markdownRenderer.Style.Quote.BarMargin = 10;
             // markdownRenderer.Style.Quote.Padding = 10;
 
             // // Table
@@ -278,7 +280,6 @@ namespace NUIText
 
             descriptionRenderer.Style.Paragraph.FontColor = "#EFEFEFFF";
             descriptionRenderer.Style.Table.BorderColor = "#FFFFFFFF";
-            descriptionRenderer.Style.Quote.BackgroundColor = "#152536FF";
             descriptionRenderer.Style.ThematicBreak.Margin = 0;
 
             descriptionRenderer.Render(AutoTest.ShortcutGuide + GetCurrentOptions());
