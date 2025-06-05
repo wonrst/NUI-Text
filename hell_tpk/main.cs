@@ -86,11 +86,12 @@ namespace NUIText
             // markdownRenderer.Style.Heading.FontFamily = "SamsungOneUI_700";
 
             // // ThematicBreak
-            // markdownRenderer.Style.ThematicBreak.Color = "#EEEEEEFF";
+            // markdownRenderer.Style.ThematicBreak.Color = "#DFDFDFFF";
             // markdownRenderer.Style.ThematicBreak.Thickness = 1;
             // markdownRenderer.Style.ThematicBreak.Margin = 10;
 
             // // Quote
+            // markdownRenderer.Style.Quote.FontColor = "#2F2F2FFF";
             // markdownRenderer.Style.Quote.BarColor = "#DFDFDFFF";
             // markdownRenderer.Style.Quote.BarWidth = 6;
             // markdownRenderer.Style.Quote.BarMargin = 10;
@@ -104,11 +105,11 @@ namespace NUIText
             // markdownRenderer.Style.Table.ItemPadding = 5;
 
             // // Code
-            // markdownRenderer.Style.Code.FontFamily = "Ubuntu Mono"; // FIXME
+            // markdownRenderer.Style.Code.FontFamily = "Ubuntu Mono"; // FIXME: Tizen devices do not have mono space font.
             // markdownRenderer.Style.Code.FontColor = "#121212FF";
             // markdownRenderer.Style.Code.BackgroundColor = "#CCCCCC33";
             // markdownRenderer.Style.Code.FontSize = 20.0f;
-            // markdownRenderer.Style.Code.TitleFontFamily = "Ubuntu Mono";
+            // markdownRenderer.Style.Code.TitleFontFamily = "Ubuntu Mono"; // FIXME: Tizen devices do not have mono space font.
             // markdownRenderer.Style.Code.TitleFontColor = "#454545FF";
             // markdownRenderer.Style.Code.TitleBackgroundColor = "#CCCCCC55";
             // markdownRenderer.Style.Code.TitleFontSize = 16.0f;
@@ -280,6 +281,7 @@ namespace NUIText
 
             descriptionRenderer.Style.Paragraph.FontColor = "#EFEFEFFF";
             descriptionRenderer.Style.Table.BorderColor = "#FFFFFFFF";
+            descriptionRenderer.Style.Quote.FontColor = "#DFDFDFFF";
             descriptionRenderer.Style.ThematicBreak.Margin = 0;
 
             descriptionRenderer.Render(AutoTest.ShortcutGuide + GetCurrentOptions());
