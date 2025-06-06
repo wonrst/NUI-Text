@@ -17,6 +17,8 @@ namespace NUIText
         public MarkdownRenderer markdownRenderer;
         public MarkdownRenderer descriptionRenderer;
 
+        public View view;
+
         protected override void OnCreate()
         {
             base.OnCreate();
@@ -34,7 +36,7 @@ namespace NUIText
             window.WindowSize = windowSize;
             window.KeyEvent += OnKeyEvent;
 
-            var view = new View()
+            view = new View()
             {
                 Layout = new LinearLayout()
                 {
@@ -268,6 +270,28 @@ namespace NUIText
                 streamSim.IntervalMs += streamSim.IntervalMs == 1 ? 9 : 10;
                 UpdateDescription();
             }
+            else if (e.Key.KeyPressedName == "n")
+            {
+                LightMode(markdownRenderer);
+                markdownRenderer.Clear();
+                view.BackgroundColor = Color.White;
+
+                DarkMode(descriptionRenderer);
+                descriptionRenderer?.Clear();
+                UpdateDescription();
+                descriptionRenderer.BackgroundColor = new Color("#0F161EFF");
+            }
+            else if (e.Key.KeyPressedName == "m")
+            {
+                DarkMode(markdownRenderer);
+                markdownRenderer.Clear();
+                view.BackgroundColor = new Color("#0F161EFF");
+
+                LightMode(descriptionRenderer);
+                descriptionRenderer?.Clear();
+                UpdateDescription();
+                descriptionRenderer.BackgroundColor = Color.White;
+            }
         }
 
         View NewDescriptionRenderer()
@@ -278,10 +302,7 @@ namespace NUIText
                 HeightSpecification = LayoutParamPolicies.MatchParent,
                 BackgroundColor = new Color("#0F161EFF"),
             };
-
-            descriptionRenderer.Style.Paragraph.FontColor = "#EFEFEFFF";
-            descriptionRenderer.Style.Table.BorderColor = "#FFFFFFFF";
-            descriptionRenderer.Style.Quote.FontColor = "#DFDFDFFF";
+            DarkMode(descriptionRenderer);
             descriptionRenderer.Style.ThematicBreak.Margin = 0;
 
             descriptionRenderer.Render(AutoTest.ShortcutGuide + GetCurrentOptions());
@@ -313,6 +334,30 @@ namespace NUIText
 - **Interval:** {autoTest.IntervalMs}ms
 - **Running Count:** {autoTest.RunningCount}
 ";
+        }
+
+        void LightMode(MarkdownRenderer markdown)
+        {
+            markdown.Style.Paragraph.FontColor = "#000000FF";
+            markdown.Style.Quote.FontColor = "#2F2F2FFF";
+            markdown.Style.Code.FontColor = "#121212FF";
+            markdown.Style.Code.TitleFontColor = "#454545FF";
+            markdown.Style.Code.BackgroundColor = "#CCCCCC33";
+            markdown.Style.Code.TitleBackgroundColor = "#CCCCCC55";
+            markdown.Style.ThematicBreak.Color = "#DFDFDFFF";
+            markdown.Style.Table.BorderColor = "#000000FF";
+        }
+
+        void DarkMode(MarkdownRenderer markdown)
+        {
+            markdown.Style.Paragraph.FontColor = "#EFEFEFFF";
+            markdown.Style.Quote.FontColor = "#DFDFDFFF";
+            markdown.Style.Code.FontColor = "#EFEFEFFF";
+            markdown.Style.Code.TitleFontColor = "#E1E1E1FF";
+            markdown.Style.Code.BackgroundColor = "#030303FF";
+            markdown.Style.Code.TitleBackgroundColor = "#333333FF";
+            markdown.Style.ThematicBreak.Color = "#DFDFDFFF";
+            markdown.Style.Table.BorderColor = "#FFFFFFFF";
         }
 
         static void Main(string[] args)
