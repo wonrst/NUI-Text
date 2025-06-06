@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 using Tizen.NUI;
 
@@ -15,6 +16,7 @@ namespace NUIText
         private Action onComplete;
         private Random random = new Random();
         private bool useRandomChunkSize = false;
+        private Stopwatch stopwatch = new Stopwatch();
 
         public bool IsRunning => timer?.IsRunning() ?? false;
 
@@ -32,7 +34,7 @@ namespace NUIText
                 if (value < 1) value = 1;
                 chunkSize = value;
                 if (!useRandomChunkSize)
-                Tizen.Log.Info("NUI", $"ChunkSize:{chunkSize}");
+                Tizen.Log.Info("NUI", $"LLMStreamSimulator ChunkSize:{chunkSize}");
             }
         }
 
@@ -72,6 +74,7 @@ namespace NUIText
             this.currentIndex = 0;
             this.onChunk = onChunk;
             this.onComplete = onComplete;
+            stopwatch.Restart();
             timer.Start();
         }
 
@@ -97,6 +100,9 @@ namespace NUIText
                 onChunk?.Invoke(chunk, currentIndex);
                 return true;
             }
+            stopwatch.Stop();
+            Tizen.Log.Info("NUI", $"LLMStreamSimulator Time elapsed: {stopwatch.Elapsed.TotalMilliseconds:0.##} ms\n");
+
             onComplete?.Invoke();
             return false;
         }
