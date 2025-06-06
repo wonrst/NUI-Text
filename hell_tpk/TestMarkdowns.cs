@@ -1420,6 +1420,41 @@ Ready to start writing?  Either start changing stuff on the left or
 [clear everything](/demo/?text=) with a simple click.
 ",
 
+@"
+# 📝 Ordered/Unordered list
+
+---
+
+1. First ordered item
+2. Second ordered item
+   - First bullet in second ordered item
+     - Nested bullet 1
+       1. Ordered inside nested bullet
+       2. Another ordered inside
+          - Even deeper bullet
+            - **Bold text** and *italic* at deep level
+            1. Deep ordered again
+   - Second bullet in second ordered item
+3. Third ordered item
+   1. Nested ordered item 1
+      - Bullet under nested ordered
+      - Another bullet
+         1. Ordered under bullet
+            - Bullet under ordered under bullet
+   2. Nested ordered item 2
+      1. Deeply nested ordered
+- Top-level unordered 1
+  1. Ordered inside unordered 1
+     - Bullet inside ordered inside unordered
+- Top-level unordered 2
+  - Second level bullet
+    - Third level bullet
+      - Fourth level bullet
+         1. Ordered at fourth level
+            - Bullet after ordered
+- Last unordered item
+",
+
         }; // samples
 
 
