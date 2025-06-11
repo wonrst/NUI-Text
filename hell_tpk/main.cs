@@ -18,9 +18,12 @@ namespace NUIText
         public MarkdownRenderer descriptionRenderer;
 
         public View view;
+        public bool disposeMode = false;
 
         protected override void OnCreate()
         {
+            NUIApplication.IsUsingXaml = false;
+
             base.OnCreate();
             Initialize();
         }
@@ -125,14 +128,28 @@ namespace NUIText
             streamSim.Stop();
             string sample = TestMarkdowns.GetSample(index);
             var sb = new System.Text.StringBuilder();
-            markdownRenderer.Clear();
+            if (disposeMode)
+            {
+                markdownRenderer?.Clear();
+                markdownRenderer?.Dispose();
+                markdownRenderer = new MarkdownRenderer
+                {
+                    WidthSpecification = 1200,
+                    HeightSpecification = LayoutParamPolicies.WrapContent,
+                };
+                view.Add(markdownRenderer);
+            }
+            else
+            {
+                markdownRenderer.Clear();
+            }
             streamSim.Start(sample, (chunk, idx) =>
             {
                 sb.Append(chunk);
                 markdownRenderer.Render(sb.ToString());
             });
             UpdateDescription();
-            Tizen.Log.Error(TAG, $"[AutoTest] RunningCount:{autoTest.RunningCount}, IsRunning:{autoTest.IsRunning}, AliveCount:{View.AliveCount}\n");
+            Tizen.Log.Error(TAG, $"[AutoTest] RunningCount:{autoTest.RunningCount}, IsRunning:{autoTest.IsRunning}, DisposeMode:{disposeMode} AliveCount:{View.AliveCount}\n");
         }
 
         void StartStreamingPrev()
@@ -158,6 +175,10 @@ namespace NUIText
             {
                 sb.Append(chunk);
                 markdownRenderer.Render(sb.ToString());
+            },
+            () =>
+            {
+                Tizen.Log.Error(TAG, $"[AutoTest] AliveCount:{View.AliveCount}\n");
             });
         }
 
@@ -165,6 +186,32 @@ namespace NUIText
         {
             streamSim.Stop();
             string sample = TestMarkdowns.GetRandom();
+            var sb = new System.Text.StringBuilder();
+            markdownRenderer.Clear();
+            streamSim.Start(sample, (chunk, idx) =>
+            {
+                sb.Append(chunk);
+                markdownRenderer.Render(sb.ToString());
+            });
+        }
+
+        void StartStreamingNextRef()
+        {
+            streamSim.Stop();
+            string sample = TestMarkdowns.GetNextRef();
+            var sb = new System.Text.StringBuilder();
+            markdownRenderer.Clear();
+            streamSim.Start(sample, (chunk, idx) =>
+            {
+                sb.Append(chunk);
+                markdownRenderer.Render(sb.ToString());
+            });
+        }
+
+        void StartStreamingPrevRef()
+        {
+            streamSim.Stop();
+            string sample = TestMarkdowns.GetPrevRef();
             var sb = new System.Text.StringBuilder();
             markdownRenderer.Clear();
             streamSim.Start(sample, (chunk, idx) =>
@@ -291,6 +338,24 @@ namespace NUIText
                 descriptionRenderer?.Clear();
                 UpdateDescription();
                 descriptionRenderer.BackgroundColor = Color.White;
+            }
+            else if (e.Key.KeyPressedName == "u")
+            {
+                disposeMode = false;
+                Tizen.Log.Error(TAG, $"Dispose Mode Off\n");
+            }
+            else if (e.Key.KeyPressedName == "i")
+            {
+                disposeMode = true;
+                Tizen.Log.Error(TAG, $"Dispose Mode On\n");
+            }
+            else if (e.Key.KeyPressedName == "k")
+            {
+                StartStreamingPrevRef();
+            }
+            else if (e.Key.KeyPressedName == "l")
+            {
+                StartStreamingNextRef();
             }
         }
 
