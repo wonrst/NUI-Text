@@ -157,7 +157,21 @@ namespace NUIText
             streamSim.Stop();
             string sample = TestMarkdowns.GetPrev();
             var sb = new System.Text.StringBuilder();
-            markdownRenderer.Clear();
+            if (disposeMode)
+            {
+                markdownRenderer?.Clear();
+                markdownRenderer?.Dispose();
+                markdownRenderer = new MarkdownRenderer
+                {
+                    WidthSpecification = 1200,
+                    HeightSpecification = LayoutParamPolicies.WrapContent,
+                };
+                view.Add(markdownRenderer);
+            }
+            else
+            {
+                markdownRenderer.Clear();
+            }
             streamSim.Start(sample, (chunk, idx) =>
             {
                 sb.Append(chunk);
@@ -170,7 +184,21 @@ namespace NUIText
             streamSim.Stop();
             string sample = TestMarkdowns.GetNext();
             var sb = new System.Text.StringBuilder();
-            markdownRenderer.Clear();
+            if (disposeMode)
+            {
+                markdownRenderer?.Clear();
+                markdownRenderer?.Dispose();
+                markdownRenderer = new MarkdownRenderer
+                {
+                    WidthSpecification = 1200,
+                    HeightSpecification = LayoutParamPolicies.WrapContent,
+                };
+                view.Add(markdownRenderer);
+            }
+            else
+            {
+                markdownRenderer.Clear();
+            }
             streamSim.Start(sample, (chunk, idx) =>
             {
                 sb.Append(chunk);
@@ -297,6 +325,11 @@ namespace NUIText
                 streamSim.UseRandomChunkSize = !streamSim.UseRandomChunkSize;
                 UpdateDescription();
             }
+            else if (e.Key.KeyPressedName == "t")
+            {
+                streamSim.ChunkSize = 9999;
+                UpdateDescription();
+            }
             else if (e.Key.KeyPressedName == "d")
             {
                 autoTest.IntervalMs -= 1000;
@@ -316,6 +349,16 @@ namespace NUIText
             {
                 streamSim.IntervalMs += streamSim.IntervalMs == 1 ? 9 : 10;
                 UpdateDescription();
+            }
+            else if (e.Key.KeyPressedName == "v")
+            {
+                view.LayoutDirection = ViewLayoutDirectionType.RTL;
+                Tizen.Log.Error(TAG, $"RTL\n");
+            }
+            else if (e.Key.KeyPressedName == "b")
+            {
+                view.LayoutDirection = ViewLayoutDirectionType.LTR;
+                Tizen.Log.Error(TAG, $"LTR\n");
             }
             else if (e.Key.KeyPressedName == "n")
             {
