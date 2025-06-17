@@ -19,6 +19,7 @@ namespace NUIText
 
         public View view;
         public bool disposeMode = false;
+        public bool asyncRendering = false;
 
         protected override void OnCreate()
         {
@@ -131,14 +132,7 @@ namespace NUIText
             var sb = new System.Text.StringBuilder();
             if (disposeMode)
             {
-                markdownRenderer?.Clear();
-                markdownRenderer?.Dispose();
-                markdownRenderer = new MarkdownRenderer
-                {
-                    WidthSpecification = 1200,
-                    HeightSpecification = LayoutParamPolicies.WrapContent,
-                };
-                view.Add(markdownRenderer);
+                view.Add(NewMarkdownRenderer());
             }
             else
             {
@@ -160,14 +154,7 @@ namespace NUIText
             var sb = new System.Text.StringBuilder();
             if (disposeMode)
             {
-                markdownRenderer?.Clear();
-                markdownRenderer?.Dispose();
-                markdownRenderer = new MarkdownRenderer
-                {
-                    WidthSpecification = 1200,
-                    HeightSpecification = LayoutParamPolicies.WrapContent,
-                };
-                view.Add(markdownRenderer);
+                view.Add(NewMarkdownRenderer());
             }
             else
             {
@@ -187,14 +174,7 @@ namespace NUIText
             var sb = new System.Text.StringBuilder();
             if (disposeMode)
             {
-                markdownRenderer?.Clear();
-                markdownRenderer?.Dispose();
-                markdownRenderer = new MarkdownRenderer
-                {
-                    WidthSpecification = 1200,
-                    HeightSpecification = LayoutParamPolicies.WrapContent,
-                };
-                view.Add(markdownRenderer);
+                view.Add(NewMarkdownRenderer());
             }
             else
             {
@@ -403,14 +383,29 @@ namespace NUIText
             }
             else if (e.Key.KeyPressedName == "h")
             {
-                markdownRenderer.AsyncRendering = false;
+                asyncRendering = false;
+                markdownRenderer.AsyncRendering = asyncRendering;
                 Tizen.Log.Error(TAG, $"AsyncRendering Off\n");
             }
             else if (e.Key.KeyPressedName == "j")
             {
-                markdownRenderer.AsyncRendering = true;
+                asyncRendering = true;
+                markdownRenderer.AsyncRendering = asyncRendering;
                 Tizen.Log.Error(TAG, $"AsyncRendering On\n");
             }
+        }
+
+        View NewMarkdownRenderer()
+        {
+            markdownRenderer?.Clear();
+            markdownRenderer?.Dispose();
+            markdownRenderer = new MarkdownRenderer
+            {
+                WidthSpecification = 1200,
+                HeightSpecification = LayoutParamPolicies.WrapContent,
+                AsyncRendering = asyncRendering,
+            };
+            return markdownRenderer;
         }
 
         View NewDescriptionRenderer()
