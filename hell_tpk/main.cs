@@ -81,6 +81,7 @@ namespace NUIText
             // markdownRenderer.Style.Paragraph.FontSize = 20.0f;
             // markdownRenderer.Style.Paragraph.FontFamily = "SamsungOneUI_400";
             // markdownRenderer.Style.Paragraph.LineHeight = 32.0f;
+            // markdownRenderer.Style.Paragraph.StrikethroughThickness = 2;
 
             // // Heading
             // markdownRenderer.Style.Heading.FontSizeLevel1 = 28.0f;
