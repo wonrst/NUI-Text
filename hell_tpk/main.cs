@@ -396,9 +396,15 @@ namespace NUIText
             {
                 StartStreamingPrevRef();
             }
-            else if (e.Key.KeyPressedName == "l")
+            else if (e.Key.KeyPressedName == "h")
             {
-                StartStreamingNextRef();
+                markdownRenderer.AsyncRendering = false;
+                Tizen.Log.Error(TAG, $"AsyncRendering Off\n");
+            }
+            else if (e.Key.KeyPressedName == "j")
+            {
+                markdownRenderer.AsyncRendering = true;
+                Tizen.Log.Error(TAG, $"AsyncRendering On\n");
             }
         }
 
