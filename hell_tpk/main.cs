@@ -396,6 +396,10 @@ namespace NUIText
             {
                 StartStreamingPrevRef();
             }
+            else if (e.Key.KeyPressedName == "l")
+            {
+                StartStreamingNextRef();
+            }
             else if (e.Key.KeyPressedName == "h")
             {
                 markdownRenderer.AsyncRendering = false;
