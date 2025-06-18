@@ -20,6 +20,7 @@ namespace NUIText
         public View view;
         public bool disposeMode = false;
         public bool asyncRendering = false;
+        public float scale = 1.0f;
 
         protected override void OnCreate()
         {
@@ -393,6 +394,19 @@ namespace NUIText
                 markdownRenderer.AsyncRendering = asyncRendering;
                 Tizen.Log.Error(TAG, $"AsyncRendering On\n");
             }
+            else if (e.Key.KeyPressedName == "7")
+            {
+                scale -= 0.1f;
+                if (scale < 0.2f) scale = 0.2f;
+                view.Add(NewMarkdownRenderer());
+                Tizen.Log.Error(TAG, $"LLMS scale:{scale}\n");
+            }
+            else if (e.Key.KeyPressedName == "8")
+            {
+                scale += 0.1f;
+                view.Add(NewMarkdownRenderer());
+                Tizen.Log.Error(TAG, $"LLMS scale:{scale}\n");
+            }
         }
 
         View NewMarkdownRenderer()
@@ -405,6 +419,27 @@ namespace NUIText
                 HeightSpecification = LayoutParamPolicies.WrapContent,
                 AsyncRendering = asyncRendering,
             };
+
+            markdownRenderer.Style.Common.Indent = (int)(40 * scale);
+            markdownRenderer.Style.Common.Padding = (int)(10 * scale);
+            markdownRenderer.Style.Common.Margin = (int)(10 * scale);
+            markdownRenderer.Style.Paragraph.FontSize = 20.0f * scale;
+            markdownRenderer.Style.Paragraph.LineHeight = 32.0f * scale;
+            markdownRenderer.Style.Heading.FontSizeLevel1 = 28.0f * scale;
+            markdownRenderer.Style.Heading.FontSizeLevel2 = 24.0f * scale;
+            markdownRenderer.Style.Heading.FontSizeLevel3 = 20.0f * scale;
+            markdownRenderer.Style.Heading.FontSizeLevel4 = 16.0f * scale;
+            markdownRenderer.Style.Heading.FontSizeLevel5 = 12.0f * scale;
+            markdownRenderer.Style.ThematicBreak.Margin = (int)(10 * scale);
+            markdownRenderer.Style.Quote.BarWidth = (int)(6 * scale);
+            markdownRenderer.Style.Quote.BarMargin = (int)(10 * scale);
+            markdownRenderer.Style.Quote.Padding = (int)(10 * scale);
+            markdownRenderer.Style.Table.Padding = (int)(10 * scale);
+            markdownRenderer.Style.Table.ItemPadding = (int)(5 * scale);
+            markdownRenderer.Style.Code.FontSize = 20.0f * scale;
+            markdownRenderer.Style.Code.TitleFontSize = 16.0f * scale;
+            markdownRenderer.Style.Code.Padding = (int)(10 * scale);
+
             return markdownRenderer;
         }
 
