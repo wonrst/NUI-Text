@@ -104,6 +104,7 @@ namespace NUIText
             // markdownRenderer.Style.Quote.BarWidth = 6;
             // markdownRenderer.Style.Quote.BarMargin = 10;
             // markdownRenderer.Style.Quote.Padding = 10;
+            // markdownRenderer.Style.Quote.BarCornerRadius = 3.0f;
 
             // // Table
             // markdownRenderer.Style.Table.BackgroundColor = "#00000000";
@@ -111,6 +112,7 @@ namespace NUIText
             // markdownRenderer.Style.Table.BorderThickness = 1;
             // markdownRenderer.Style.Table.Padding = 10;
             // markdownRenderer.Style.Table.ItemPadding = 5;
+            // markdownRenderer.Style.Table.CornerRadius = 12.0f;
 
             // // Code
             // markdownRenderer.Style.Code.FontFamily = "Ubuntu Mono"; // FIXME: Tizen devices do not have mono space font.
@@ -122,6 +124,7 @@ namespace NUIText
             // markdownRenderer.Style.Code.TitleBackgroundColor = "#CCCCCC55";
             // markdownRenderer.Style.Code.TitleFontSize = 16.0f;
             // markdownRenderer.Style.Code.Padding = 10;
+            // markdownRenderer.Style.Code.CornerRadius = 12.0f;
 
             // markdownRenderer.Render(simpleText);
         }
@@ -434,11 +437,14 @@ namespace NUIText
             markdownRenderer.Style.Quote.BarWidth = (int)(6 * scale);
             markdownRenderer.Style.Quote.BarMargin = (int)(10 * scale);
             markdownRenderer.Style.Quote.Padding = (int)(10 * scale);
+            markdownRenderer.Style.Quote.BarCornerRadius = 3.0f * scale;
             markdownRenderer.Style.Table.Padding = (int)(10 * scale);
             markdownRenderer.Style.Table.ItemPadding = (int)(5 * scale);
+            markdownRenderer.Style.Table.CornerRadius = 12.0f * scale;
             markdownRenderer.Style.Code.FontSize = 20.0f * scale;
             markdownRenderer.Style.Code.TitleFontSize = 16.0f * scale;
             markdownRenderer.Style.Code.Padding = (int)(10 * scale);
+            markdownRenderer.Style.Code.CornerRadius = 12.0f * scale;
 
             return markdownRenderer;
         }
