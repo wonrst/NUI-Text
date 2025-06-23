@@ -349,24 +349,26 @@ namespace NUIText
             else if (e.Key.KeyPressedName == "n")
             {
                 LightMode(markdownRenderer);
-                markdownRenderer.Clear();
                 view.BackgroundColor = Color.White;
 
                 DarkMode(descriptionRenderer);
-                descriptionRenderer?.Clear();
                 UpdateDescription();
                 descriptionRenderer.BackgroundColor = new Color("#0F161EFF");
+
+                markdownRenderer.ClearAndRender();
+                descriptionRenderer.ClearAndRender();
             }
             else if (e.Key.KeyPressedName == "m")
             {
                 DarkMode(markdownRenderer);
-                markdownRenderer.Clear();
                 view.BackgroundColor = new Color("#0F161EFF");
 
                 LightMode(descriptionRenderer);
-                descriptionRenderer?.Clear();
                 UpdateDescription();
                 descriptionRenderer.BackgroundColor = Color.White;
+
+                markdownRenderer.ClearAndRender();
+                descriptionRenderer.ClearAndRender();
             }
             else if (e.Key.KeyPressedName == "u")
             {
@@ -402,15 +404,45 @@ namespace NUIText
             {
                 scale -= 0.1f;
                 if (scale < 0.2f) scale = 0.2f;
-                view.Add(NewMarkdownRenderer());
+
+                UpdateMarkdownRenderer(markdownRenderer);
+                markdownRenderer.ClearAndRender();
                 Tizen.Log.Error(TAG, $"LLMS scale:{scale}\n");
             }
             else if (e.Key.KeyPressedName == "8")
             {
                 scale += 0.1f;
-                view.Add(NewMarkdownRenderer());
+
+                UpdateMarkdownRenderer(markdownRenderer);
+                markdownRenderer.ClearAndRender();
                 Tizen.Log.Error(TAG, $"LLMS scale:{scale}\n");
             }
+        }
+
+        void UpdateMarkdownRenderer(MarkdownRenderer markdown)
+        {
+            markdown.Style.Common.Indent = (int)(40 * scale);
+            markdown.Style.Common.Padding = (int)(10 * scale);
+            markdown.Style.Common.Margin = (int)(10 * scale);
+            markdown.Style.Paragraph.FontSize = 20.0f * scale;
+            markdown.Style.Paragraph.LineHeight = 32.0f * scale;
+            markdown.Style.Heading.FontSizeLevel1 = 28.0f * scale;
+            markdown.Style.Heading.FontSizeLevel2 = 24.0f * scale;
+            markdown.Style.Heading.FontSizeLevel3 = 20.0f * scale;
+            markdown.Style.Heading.FontSizeLevel4 = 16.0f * scale;
+            markdown.Style.Heading.FontSizeLevel5 = 12.0f * scale;
+            markdown.Style.ThematicBreak.Margin = (int)(10 * scale);
+            markdown.Style.Quote.BarWidth = (int)(6 * scale);
+            markdown.Style.Quote.BarMargin = (int)(10 * scale);
+            markdown.Style.Quote.Padding = (int)(10 * scale);
+            markdown.Style.Quote.BarCornerRadius = 3.0f * scale;
+            markdown.Style.Table.Padding = (int)(10 * scale);
+            markdown.Style.Table.ItemPadding = (int)(5 * scale);
+            markdown.Style.Table.CornerRadius = 12.0f * scale;
+            markdown.Style.Code.FontSize = 20.0f * scale;
+            markdown.Style.Code.TitleFontSize = 16.0f * scale;
+            markdown.Style.Code.Padding = (int)(10 * scale);
+            markdown.Style.Code.CornerRadius = 12.0f * scale;
         }
 
         View NewMarkdownRenderer()
@@ -423,30 +455,7 @@ namespace NUIText
                 HeightSpecification = LayoutParamPolicies.WrapContent,
                 AsyncRendering = asyncRendering,
             };
-
-            markdownRenderer.Style.Common.Indent = (int)(40 * scale);
-            markdownRenderer.Style.Common.Padding = (int)(10 * scale);
-            markdownRenderer.Style.Common.Margin = (int)(10 * scale);
-            markdownRenderer.Style.Paragraph.FontSize = 20.0f * scale;
-            markdownRenderer.Style.Paragraph.LineHeight = 32.0f * scale;
-            markdownRenderer.Style.Heading.FontSizeLevel1 = 28.0f * scale;
-            markdownRenderer.Style.Heading.FontSizeLevel2 = 24.0f * scale;
-            markdownRenderer.Style.Heading.FontSizeLevel3 = 20.0f * scale;
-            markdownRenderer.Style.Heading.FontSizeLevel4 = 16.0f * scale;
-            markdownRenderer.Style.Heading.FontSizeLevel5 = 12.0f * scale;
-            markdownRenderer.Style.ThematicBreak.Margin = (int)(10 * scale);
-            markdownRenderer.Style.Quote.BarWidth = (int)(6 * scale);
-            markdownRenderer.Style.Quote.BarMargin = (int)(10 * scale);
-            markdownRenderer.Style.Quote.Padding = (int)(10 * scale);
-            markdownRenderer.Style.Quote.BarCornerRadius = 3.0f * scale;
-            markdownRenderer.Style.Table.Padding = (int)(10 * scale);
-            markdownRenderer.Style.Table.ItemPadding = (int)(5 * scale);
-            markdownRenderer.Style.Table.CornerRadius = 12.0f * scale;
-            markdownRenderer.Style.Code.FontSize = 20.0f * scale;
-            markdownRenderer.Style.Code.TitleFontSize = 16.0f * scale;
-            markdownRenderer.Style.Code.Padding = (int)(10 * scale);
-            markdownRenderer.Style.Code.CornerRadius = 12.0f * scale;
-
+            UpdateMarkdownRenderer(markdownRenderer);
             return markdownRenderer;
         }
 
