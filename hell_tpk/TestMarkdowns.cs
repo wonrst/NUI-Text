@@ -1657,6 +1657,8 @@ Ready to start writing?  Either start changing stuff on the left or
 #### H4 Heading
 
 ##### H5 Heading
+
+###### H6 Heading
 ---
 
 ```Markdown
@@ -1669,6 +1671,8 @@ Ready to start writing?  Either start changing stuff on the left or
 #### H4 Heading
 
 ##### H5 Heading
+
+###### H6 Heading
 ```
 ",
 

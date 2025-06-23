@@ -91,6 +91,7 @@ namespace NUIText
             // markdownRenderer.Style.Heading.FontSizeLevel3 = 20.0f;
             // markdownRenderer.Style.Heading.FontSizeLevel4 = 16.0f;
             // markdownRenderer.Style.Heading.FontSizeLevel5 = 12.0f;
+            // markdownRenderer.Style.Heading.FontSizeLevel6 = 10.0f;
             // markdownRenderer.Style.Heading.FontFamily = "SamsungOneUI_700";
 
             // // ThematicBreak
