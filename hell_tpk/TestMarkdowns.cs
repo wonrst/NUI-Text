@@ -1709,6 +1709,38 @@ Ready to start writing?  Either start changing stuff on the left or
 ",
 
 @"
+# 📝 리스트
+
+---
+
+## 복합 리스트
+
+1. 첫 번째 항목
+   > 리스트 안에 인용문입니다.
+   > 두 번째 줄입니다.
+2. 두 번째 항목
+   - Inline code block : `printf(""Hello, world"");`
+   - Fenced code block : 
+     ``` cpp
+       printf(""Hello, world"");
+     ```
+
+---
+
+```Markdown
+1. 첫 번째 항목
+   > 리스트 안에 인용문입니다.
+   > 두 번째 줄입니다.
+2. 두 번째 항목
+   - Inline code block : `printf(""Hello, world"");`
+   - Fenced code block : 
+     ``` cpp
+       printf(""Hello, world"");
+     ```
+```
+",
+
+@"
 # ✅ 체크박스 리스트 (Task List)
 
 ---
