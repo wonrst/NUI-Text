@@ -76,7 +76,7 @@ namespace NUIText
             // // Common
             // markdownRenderer.Style.Common.Indent = 40;
             // markdownRenderer.Style.Common.Padding = 10;
-            // markdownRenderer.Style.Common.Margin = 10;
+            // markdownRenderer.Style.Common.ItemPadding = 20;
 
             // // Paragraph
             // markdownRenderer.Style.Paragraph.FontColor = "#000000FF";
@@ -84,6 +84,7 @@ namespace NUIText
             // markdownRenderer.Style.Paragraph.FontFamily = "SamsungOneUI_400";
             // markdownRenderer.Style.Paragraph.LineHeight = 32.0f;
             // markdownRenderer.Style.Paragraph.StrikethroughThickness = 2;
+            // markdownRenderer.Style.Paragraph.Margin = 10;
 
             // // Heading
             // markdownRenderer.Style.Heading.FontSizeLevel1 = 28.0f;
@@ -126,6 +127,10 @@ namespace NUIText
             // markdownRenderer.Style.Code.TitleFontSize = 16.0f;
             // markdownRenderer.Style.Code.Padding = 10;
             // markdownRenderer.Style.Code.CornerRadius = 12.0f;
+
+            // // List
+            // markdownRenderer.Style.List.ItemMarginTop = 0;
+            // markdownRenderer.Style.List.ItemMarginBottom = 10;
 
             // markdownRenderer.Render(simpleText);
         }
@@ -423,7 +428,7 @@ namespace NUIText
         {
             markdown.Style.Common.Indent = (int)(40 * scale);
             markdown.Style.Common.Padding = (int)(10 * scale);
-            markdown.Style.Common.Margin = (int)(10 * scale);
+            markdown.Style.Common.ItemPadding = (int)(20 * scale);
             markdown.Style.Paragraph.FontSize = 20.0f * scale;
             markdown.Style.Paragraph.LineHeight = 32.0f * scale;
             markdown.Style.Heading.FontSizeLevel1 = 28.0f * scale;
@@ -443,6 +448,8 @@ namespace NUIText
             markdown.Style.Code.TitleFontSize = 16.0f * scale;
             markdown.Style.Code.Padding = (int)(10 * scale);
             markdown.Style.Code.CornerRadius = 12.0f * scale;
+            markdown.Style.List.ItemMarginTop = 0;
+            markdown.Style.List.ItemMarginBottom = (int)(10 * scale);
         }
 
         View NewMarkdownRenderer()
@@ -469,6 +476,7 @@ namespace NUIText
             };
             DarkMode(descriptionRenderer);
             descriptionRenderer.Style.ThematicBreak.Margin = 0;
+            descriptionRenderer.Style.List.ItemMarginBottom = 0;
 
             descriptionRenderer.Render(AutoTest.ShortcutGuide + GetCurrentOptions());
             return descriptionRenderer; 
