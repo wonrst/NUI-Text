@@ -71,6 +71,9 @@ namespace NUIText
             // do not create the description renderer (NewDescriptionRenderer).
             view.Add(NewDescriptionRenderer());
 
+            string markdown = "## **Hello** *world*";
+            Tizen.Log.Info(TAG, $"{markdown} => {MarkdownParser.MarkdownToPlainText(markdown)}");
+
 
             // // For Style test
             // // Common
@@ -421,6 +424,16 @@ namespace NUIText
                 UpdateMarkdownRenderer(markdownRenderer);
                 markdownRenderer.ClearAndRender();
                 Tizen.Log.Error(TAG, $"LLMS scale:{scale}\n");
+            }
+            else if (e.Key.KeyPressedName == "o")
+            {
+                streamSim.MarkdownToPlainText = false;
+                Tizen.Log.Error(TAG, $"LLMS markdown to plain text Off\n");
+            }
+            else if (e.Key.KeyPressedName == "p")
+            {
+                streamSim.MarkdownToPlainText = true;
+                Tizen.Log.Error(TAG, $"LLMS markdown to plain text On\n");
             }
         }
 

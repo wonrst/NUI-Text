@@ -20,6 +20,8 @@ namespace NUIText
 
         public bool IsRunning => timer?.IsRunning() ?? false;
 
+        public bool MarkdownToPlainText { get; set; } = true;
+
         public bool UseRandomChunkSize
         {
             get => useRandomChunkSize;
@@ -101,6 +103,9 @@ namespace NUIText
                 return true;
             }
             stopwatch.Stop();
+
+            if (MarkdownToPlainText)
+                Tizen.Log.Info("NUI", $"LLMStreamSimulator MarkdownToPlainText:\n{Tizen.NUI.MarkdownRenderer.MarkdownParser.MarkdownToPlainText(fullText)}\n");
             Tizen.Log.Info("NUI", $"LLMStreamSimulator Time elapsed: {stopwatch.Elapsed.TotalMilliseconds:0.##} ms\n");
 
             onComplete?.Invoke();
